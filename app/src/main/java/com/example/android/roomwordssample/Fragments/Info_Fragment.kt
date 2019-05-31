@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.android.roomwordssample.Adapter.CarListAdapter
 import com.example.android.roomwordssample.Adapter.WordListAdapter
+import com.example.android.roomwordssample.Entities.Car
 
 import com.example.android.roomwordssample.R
 import com.example.android.roomwordssample.ViewModel.CarViewModel
@@ -62,10 +63,10 @@ class Info_Fragment : Fragment() {
         val linearlayoutmanager = LinearLayoutManager(this.context)
 
         if(orientation == Configuration.ORIENTATION_PORTRAIT){
-            adapter = CarListAdapter()
+            adapter = CarListAdapter({car : Car -> listener?.clickportrait(car)})
         }
         if(orientation == Configuration.ORIENTATION_LANDSCAPE){
-            adapter = CarListAdapter()
+            adapter = CarListAdapter({car : Car -> listener?.clicklandscape(car)})
         }
 
         container.recyclerview.adapter = adapter as CarListAdapter
@@ -79,11 +80,6 @@ class Info_Fragment : Fragment() {
             setHasFixedSize(true)
             layoutManager = linearlayoutmanager
         }
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(uri: Uri) {
-        listener?.onFragmentInteraction(uri)
     }
 
     override fun onAttach(context: Context) {
@@ -113,7 +109,8 @@ class Info_Fragment : Fragment() {
      */
     interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        fun onFragmentInteraction(uri: Uri)
+        fun clickportrait(car: Car)
+        fun clicklandscape(car: Car)
     }
 
     companion object {

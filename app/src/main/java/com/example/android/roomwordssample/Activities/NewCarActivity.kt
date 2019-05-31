@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.android.roomwordssample.Entities.Car
 import com.example.android.roomwordssample.R
@@ -27,6 +28,10 @@ class NewCarActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_car)
         carViewModel = ViewModelProviders.of(this).get(CarViewModel::class.java)
+        var carlist = 0
+       carViewModel.allCars.observe(this, Observer { cars ->
+           cars?.let { carlist = it.size }
+       })
         val editBrandView = findViewById<EditText>(R.id.edit_brand)
         val editModelView = findViewById<EditText>(R.id.edit_model)
         val editYearView = findViewById<EditText>(R.id.edit_year)
@@ -47,7 +52,7 @@ class NewCarActivity : AppCompatActivity() {
                 Toast.makeText(this,"Car not saved", Toast.LENGTH_SHORT).show()
             }
             else {
-                val car = Car(editBrandView.text.toString(), editModelView.text.toString(),
+                val car = Car(carlist,editBrandView.text.toString(), editModelView.text.toString(),
                         editYearView.text.toString().toInt(), editInfoView.text.toString(),
                         editPriceView.text.toString().toInt(), editSpecView.text.toString())
                 carViewModel.insert(car)

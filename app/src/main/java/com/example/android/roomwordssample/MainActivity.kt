@@ -31,24 +31,28 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.appcompat.widget.Toolbar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.android.roomwordssample.Activities.CarViewerActivity
 import com.example.android.roomwordssample.Activities.NewCarActivity
 import com.example.android.roomwordssample.Activities.NewWordActivity
 import com.example.android.roomwordssample.Adapter.WordListAdapter
+import com.example.android.roomwordssample.Entities.Car
 import com.example.android.roomwordssample.Entities.Word
 import com.example.android.roomwordssample.Fragments.Info_Fragment
+import com.example.android.roomwordssample.Fragments.List_Fragment
 import com.example.android.roomwordssample.ViewModel.CarViewModel
 import com.example.android.roomwordssample.ViewModel.WordViewModel
+import kotlinx.android.synthetic.main.activity_car_viewer.*
+import kotlinx.android.synthetic.main.fragment_list_.*
 
 class MainActivity : AppCompatActivity(), Info_Fragment.OnFragmentInteractionListener {
-    override fun onFragmentInteraction(uri: Uri) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+
+
 
     private val newWordActivityRequestCode = 1
     private lateinit var wordViewModel: WordViewModel
     private lateinit var carViewModel: CarViewModel
     private lateinit var listfragment : Info_Fragment
-
+    private lateinit var contentfragment : List_Fragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,7 +93,35 @@ class MainActivity : AppCompatActivity(), Info_Fragment.OnFragmentInteractionLis
 
         initfragment()
     }
+    override fun clicklandscape(car: Car) {
+        Toast.makeText(this, car.model.toString(), Toast.LENGTH_SHORT).show()
+        //contentfragment = List_Fragment.newInstance() Existe doble instacia y lo toma por nulo
+        //changefragment(R.id.info, contentfragment)
+        carViewModel.allCars.observe(this, Observer { cars ->
+            cars?.let { contentfragment.apply {
+                tv_brand.text = it[car.id].brand
+            } }
+        })
 
+
+    }
+
+    override fun clickportrait(car: Car) {
+        var carro = Car(0,"","",0,"",0,"")
+        carViewModel.allCars.observe(this, Observer { cars ->
+            cars?.let { carro = Car(it[car.id].id,it[car.id].brand,"",0,"",0,"")
+            }
+        })
+
+        var content = Bundle()
+
+        content.putParcelable("object", carro)
+
+       startActivity(Intent(this,CarViewerActivity::class.java).putExtra("bundle", content))
+
+        Toast.makeText(this, car.id.toString(), Toast.LENGTH_SHORT).show()
+
+    }
     fun initfragment(){
         listfragment = Info_Fragment.newInstance()
 
@@ -97,6 +129,9 @@ class MainActivity : AppCompatActivity(), Info_Fragment.OnFragmentInteractionLis
          R.id.lmain
         }
         else {
+            contentfragment = List_Fragment.newInstance()
+            changefragment(R.id.info, contentfragment)
+
             R.id.smain
         }
         changefragment(id, listfragment)

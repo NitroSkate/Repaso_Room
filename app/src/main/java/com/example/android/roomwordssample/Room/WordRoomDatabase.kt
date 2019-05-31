@@ -32,7 +32,7 @@ import kotlinx.coroutines.launch
  * This is the backend. The database. This used to be done by the OpenHelper.
  * The fact that this has very few comments emphasizes its coolness.
  */
-@Database(entities = [Word::class, Car::class], version = 2)
+@Database(entities = [Word::class, Car::class], version = 3)
 abstract class WordRoomDatabase : RoomDatabase() {
 
     abstract fun wordDao(): WordDao
@@ -94,7 +94,7 @@ abstract class WordRoomDatabase : RoomDatabase() {
             carDao.deleteAll()
             wordDao.deleteAll()
 
-            var car1 = Car("Nissan", "Skyline Nur Spec V", 1997, "One notorius JDM car",
+            var car1 = Car(0,"Nissan", "Skyline Nur Spec V", 1997, "One notorius JDM car",
                     34000, "Engine: RB26")
             carDao.insert(car1)
 

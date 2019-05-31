@@ -10,16 +10,19 @@ import com.example.android.roomwordssample.R
 import kotlinx.android.synthetic.main.recyclercars.view.*
 import kotlinx.android.synthetic.main.recyclerview_item.view.*
 
-class CarListAdapter (): RecyclerView.Adapter<CarListAdapter.WordViewHolder>() {
+class CarListAdapter (val click: (Car) -> Unit): RecyclerView.Adapter<CarListAdapter.WordViewHolder>() {
 
     //private val inflater: LayoutInflater = LayoutInflater.from(context)
     private var cars = emptyList<Car>() // Cached copy of words
 
     class WordViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind (item: Car) = with(itemView) {
+        fun bind (item: Car, click : (Car) -> Unit) = with(itemView) {
             brand.text = item.brand
             model.text = item.model
             price.text ="$" + item.price.toString()
+            this.setOnClickListener {
+                click(item)
+            }
         }
     }
 
@@ -28,7 +31,7 @@ class CarListAdapter (): RecyclerView.Adapter<CarListAdapter.WordViewHolder>() {
         return WordViewHolder(itemView)
     }
 
-    override fun onBindViewHolder(holder: WordViewHolder, position: Int) = holder.bind(cars[position]) /*{
+    override fun onBindViewHolder(holder: WordViewHolder, position: Int) = holder.bind(cars[position], click) /*{
         val current = words[position]
         holder.wordItemView.text = current.word
     }*/
