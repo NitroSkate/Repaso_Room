@@ -5,6 +5,8 @@ import android.os.Bundle
 import com.example.android.roomwordssample.Entities.Car
 import com.example.android.roomwordssample.R
 import kotlinx.android.synthetic.main.activity_car_viewer.*
+import kotlinx.android.synthetic.main.activity_car_viewer.brandc
+import kotlinx.android.synthetic.main.recyclercars.*
 
 class CarViewerActivity : AppCompatActivity() {
 
@@ -20,7 +22,13 @@ class CarViewerActivity : AppCompatActivity() {
 
 
 
-        brand.text = car.brand
+        brandc.text = "Brand: " + car.brand
+        modelc.text = "Model: " + car.model
+        yearc.text = "Year of manufacturing: " + car.year
+        infoc.text = "Information about the car: " + car.Info
+        pricec.text = "Price: $" + car.price
+        specsc.text = "Specs: " + car.specs
+
 
     }
 

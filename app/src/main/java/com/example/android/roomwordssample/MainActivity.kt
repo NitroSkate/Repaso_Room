@@ -99,7 +99,12 @@ class MainActivity : AppCompatActivity(), Info_Fragment.OnFragmentInteractionLis
         //changefragment(R.id.info, contentfragment)
         carViewModel.allCars.observe(this, Observer { cars ->
             cars?.let { contentfragment.apply {
-                tv_brand.text = it[car.id].brand
+                tv_brand.text = "Brand: " + it[car.id].brand
+                tv_model.text = "Model: " + it[car.id].model
+                tv_year.text =  "Year of manufacturing: " + it[car.id].year.toString()
+                tv_info.text = "Info about the car: " + it[car.id].Info
+                tv_price.text ="Price: $" + it[car.id].price.toString()
+                tv_specs.text = "Specs: " + it[car.id].specs
             } }
         })
 
@@ -109,17 +114,22 @@ class MainActivity : AppCompatActivity(), Info_Fragment.OnFragmentInteractionLis
     override fun clickportrait(car: Car) {
         var carro = Car(0,"","",0,"",0,"")
         carViewModel.allCars.observe(this, Observer { cars ->
-            cars?.let { carro = Car(it[car.id].id,it[car.id].brand,"",0,"",0,"")
+            cars?.let { carro = Car(it[car.id].id, it[car.id].brand, it[car.id].model, it[car.id].year,
+                    it[car.id].Info, it[car.id].price,it[car.id].specs)
             }
         })
 
         var content = Bundle()
 
         content.putParcelable("object", carro)
+        if(carro.model == null){
+            Log.d("alv", carro.model)
+            //Toast.makeText(this, carro.model, Toast.LENGTH_SHORT).show()
+        }
+        else {
+            startActivity(Intent(this, CarViewerActivity::class.java).putExtra("bundle", content))
+        }
 
-       startActivity(Intent(this,CarViewerActivity::class.java).putExtra("bundle", content))
-
-        Toast.makeText(this, car.id.toString(), Toast.LENGTH_SHORT).show()
 
     }
     fun initfragment(){
