@@ -21,7 +21,9 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import android.content.Context
+import com.example.android.roomwordssample.Dao.CarDao
 import com.example.android.roomwordssample.Dao.WordDao
+import com.example.android.roomwordssample.Entities.Car
 import com.example.android.roomwordssample.Entities.Word
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -30,10 +32,11 @@ import kotlinx.coroutines.launch
  * This is the backend. The database. This used to be done by the OpenHelper.
  * The fact that this has very few comments emphasizes its coolness.
  */
-@Database(entities = [Word::class], version = 1)
+@Database(entities = [Word::class, Car::class], version = 2)
 abstract class WordRoomDatabase : RoomDatabase() {
 
     abstract fun wordDao(): WordDao
+    abstract fun carDao(): CarDao
 
     companion object {
         @Volatile

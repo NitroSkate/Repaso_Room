@@ -1,15 +1,21 @@
 package com.example.android.roomwordssample.Fragments
 
 import android.content.Context
+import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.android.roomwordssample.Adapter.WordListAdapter
 
 import com.example.android.roomwordssample.R
 import com.example.android.roomwordssample.ViewModel.WordViewModel
+import kotlinx.android.synthetic.main.content_main.view.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -19,17 +25,18 @@ private const val ARG_PARAM2 = "param2"
 /**
  * A simple [Fragment] subclass.
  * Activities that contain this fragment must implement the
- * [List_Fragment.OnFragmentInteractionListener] interface
+ * [Info_Fragment.OnFragmentInteractionListener] interface
  * to handle interaction events.
- * Use the [List_Fragment.newInstance] factory method to
+ * Use the [Info_Fragment.newInstance] factory method to
  * create an instance of this fragment.
  *
  */
-class List_Fragment : Fragment() {
+class Info_Fragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
     private lateinit var wordViewModel: WordViewModel
+    private lateinit var adapter : WordListAdapter
     private var listener: OnFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,7 +50,33 @@ class List_Fragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_list_, container, false)
+        val view = inflater.inflate(R.layout.fragment_info_, container, false)
+        wordViewModel = ViewModelProviders.of(this).get(WordViewModel::class.java)
+        initRecycler(resources.configuration.orientation, view)
+        return view
+    }
+
+    fun initRecycler(orientation: Int, container: View){
+        val linearlayoutmanager = LinearLayoutManager(this.context)
+
+        if(orientation == Configuration.ORIENTATION_PORTRAIT){
+            adapter = WordListAdapter()
+        }
+        if(orientation == Configuration.ORIENTATION_LANDSCAPE){
+            adapter = WordListAdapter()
+        }
+
+        container.recyclerview.adapter = adapter as WordListAdapter
+
+        wordViewModel.allWords.observe(this, Observer {words ->
+            words?.let { adapter.setWords(it) }
+
+        })
+
+        container.recyclerview.apply{
+            setHasFixedSize(true)
+            layoutManager = linearlayoutmanager
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -88,16 +121,13 @@ class List_Fragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment List_Fragment.
+         * @return A new instance of fragment Info_Fragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-                List_Fragment().apply {
-                    arguments = Bundle().apply {
-                        putString(ARG_PARAM1, param1)
-                        putString(ARG_PARAM2, param2)
-                    }
-                }
+        fun newInstance() : Info_Fragment{
+            var fragment = Info_Fragment()
+            return fragment
+        }
     }
 }
