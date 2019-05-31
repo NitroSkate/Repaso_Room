@@ -31,10 +31,12 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.appcompat.widget.Toolbar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.android.roomwordssample.Activities.NewCarActivity
 import com.example.android.roomwordssample.Activities.NewWordActivity
 import com.example.android.roomwordssample.Adapter.WordListAdapter
 import com.example.android.roomwordssample.Entities.Word
 import com.example.android.roomwordssample.Fragments.Info_Fragment
+import com.example.android.roomwordssample.ViewModel.CarViewModel
 import com.example.android.roomwordssample.ViewModel.WordViewModel
 
 class MainActivity : AppCompatActivity(), Info_Fragment.OnFragmentInteractionListener {
@@ -44,6 +46,7 @@ class MainActivity : AppCompatActivity(), Info_Fragment.OnFragmentInteractionLis
 
     private val newWordActivityRequestCode = 1
     private lateinit var wordViewModel: WordViewModel
+    private lateinit var carViewModel: CarViewModel
     private lateinit var listfragment : Info_Fragment
 
 
@@ -55,6 +58,8 @@ class MainActivity : AppCompatActivity(), Info_Fragment.OnFragmentInteractionLis
         setSupportActionBar(toolbar)
 
         wordViewModel = ViewModelProviders.of(this).get(WordViewModel::class.java)
+
+        carViewModel = ViewModelProviders.of(this).get(CarViewModel::class.java)
 
         /*val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
         val adapter = WordListAdapter()
@@ -76,8 +81,10 @@ class MainActivity : AppCompatActivity(), Info_Fragment.OnFragmentInteractionLis
 
         val fab = findViewById<FloatingActionButton>(R.id.fab)
         fab.setOnClickListener {
-            val intent = Intent(this@MainActivity, NewWordActivity::class.java)
-            startActivityForResult(intent, newWordActivityRequestCode)
+            /*val intent = Intent(this@MainActivity, NewCarActivity::class.java)
+            startActivityForResult(intent, newWordActivityRequestCode)*/
+            val intent = Intent(this@MainActivity, NewCarActivity::class.java)
+            startActivity(intent)
         }
 
         initfragment()
@@ -100,7 +107,7 @@ class MainActivity : AppCompatActivity(), Info_Fragment.OnFragmentInteractionLis
         supportFragmentManager.beginTransaction().replace(id, frag).commit()
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {
+    /*override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {
         super.onActivityResult(requestCode, resultCode, intentData)
 
         if (requestCode == newWordActivityRequestCode && resultCode == Activity.RESULT_OK) {
@@ -115,5 +122,5 @@ class MainActivity : AppCompatActivity(), Info_Fragment.OnFragmentInteractionLis
                     Toast.LENGTH_LONG
             ).show()
         }
-    }
+    }*/
 }

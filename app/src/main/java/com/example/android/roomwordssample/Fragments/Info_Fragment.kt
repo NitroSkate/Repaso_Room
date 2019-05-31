@@ -11,9 +11,11 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.android.roomwordssample.Adapter.CarListAdapter
 import com.example.android.roomwordssample.Adapter.WordListAdapter
 
 import com.example.android.roomwordssample.R
+import com.example.android.roomwordssample.ViewModel.CarViewModel
 import com.example.android.roomwordssample.ViewModel.WordViewModel
 import kotlinx.android.synthetic.main.content_main.view.*
 
@@ -35,8 +37,8 @@ class Info_Fragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    private lateinit var wordViewModel: WordViewModel
-    private lateinit var adapter : WordListAdapter
+    private lateinit var carViewModel: CarViewModel
+    private lateinit var adapter : CarListAdapter
     private var listener: OnFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,7 +53,7 @@ class Info_Fragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_info_, container, false)
-        wordViewModel = ViewModelProviders.of(this).get(WordViewModel::class.java)
+        carViewModel = ViewModelProviders.of(this).get(CarViewModel::class.java)
         initRecycler(resources.configuration.orientation, view)
         return view
     }
@@ -60,16 +62,16 @@ class Info_Fragment : Fragment() {
         val linearlayoutmanager = LinearLayoutManager(this.context)
 
         if(orientation == Configuration.ORIENTATION_PORTRAIT){
-            adapter = WordListAdapter()
+            adapter = CarListAdapter()
         }
         if(orientation == Configuration.ORIENTATION_LANDSCAPE){
-            adapter = WordListAdapter()
+            adapter = CarListAdapter()
         }
 
-        container.recyclerview.adapter = adapter as WordListAdapter
+        container.recyclerview.adapter = adapter as CarListAdapter
 
-        wordViewModel.allWords.observe(this, Observer {words ->
-            words?.let { adapter.setWords(it) }
+        carViewModel.allCars.observe(this, Observer {cars ->
+            cars?.let { adapter.setCars(it) }
 
         })
 

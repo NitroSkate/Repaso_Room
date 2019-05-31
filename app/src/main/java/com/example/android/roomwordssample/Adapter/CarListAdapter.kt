@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.android.roomwordssample.Entities.Car
 import com.example.android.roomwordssample.Entities.Word
 import com.example.android.roomwordssample.R
+import kotlinx.android.synthetic.main.recyclercars.view.*
 import kotlinx.android.synthetic.main.recyclerview_item.view.*
 
 class CarListAdapter (): RecyclerView.Adapter<CarListAdapter.WordViewHolder>() {
@@ -16,12 +17,14 @@ class CarListAdapter (): RecyclerView.Adapter<CarListAdapter.WordViewHolder>() {
 
     class WordViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind (item: Car) = with(itemView) {
-            textView.text = item.brand
+            brand.text = item.brand
+            model.text = item.model
+            price.text ="$" + item.price.toString()
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WordViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.recyclerview_item, parent, false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.recyclercars, parent, false)
         return WordViewHolder(itemView)
     }
 

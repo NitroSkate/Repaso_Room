@@ -78,7 +78,7 @@ abstract class WordRoomDatabase : RoomDatabase() {
                 // comment out the following line.
                 INSTANCE?.let { database ->
                     scope.launch {
-                        populateDatabase(database.wordDao())
+                        populateDatabase(database.wordDao(), database.carDao())
                     }
                 }
             }
@@ -88,10 +88,16 @@ abstract class WordRoomDatabase : RoomDatabase() {
          * Populate the database in a new coroutine.
          * If you want to start with more words, just add them.
          */
-        suspend fun populateDatabase(wordDao: WordDao) {
+        suspend fun populateDatabase(wordDao: WordDao, carDao: CarDao) {
             // Start the app with a clean database every time.
             // Not needed if you only populate on creation.
+            carDao.deleteAll()
             wordDao.deleteAll()
+
+            var car1 = Car("Nissan", "Skyline Nur Spec V", 1997, "One notorius JDM car",
+                    34000, "Engine: RB26")
+            carDao.insert(car1)
+
 
             var word = Word("Hello")
             wordDao.insert(word)
