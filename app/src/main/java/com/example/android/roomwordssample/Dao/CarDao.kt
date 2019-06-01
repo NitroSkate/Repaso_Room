@@ -15,7 +15,7 @@ interface CarDao {
     // Always holds/caches latest version of data. Notifies its active observers when the
     // data has changed. Since we are getting all the contents of the database,
     // we are notified whenever any of the database contents have changed.
-    @Query("SELECT * from car_table ORDER BY brand ASC")
+    @Query("SELECT * from car_table")
     fun AllCars(): LiveData<List<Car>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)

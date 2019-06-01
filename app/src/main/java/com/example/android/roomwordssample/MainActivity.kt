@@ -94,7 +94,7 @@ class MainActivity : AppCompatActivity(), Info_Fragment.OnFragmentInteractionLis
         initfragment()
     }
     override fun clicklandscape(car: Car) {
-        Toast.makeText(this, car.model.toString(), Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, car.id.toString(), Toast.LENGTH_SHORT).show()
         //contentfragment = List_Fragment.newInstance() Existe doble instacia y lo toma por nulo
         //changefragment(R.id.info, contentfragment)
         carViewModel.allCars.observe(this, Observer { cars ->
@@ -112,6 +112,7 @@ class MainActivity : AppCompatActivity(), Info_Fragment.OnFragmentInteractionLis
     }
 
     override fun clickportrait(car: Car) {
+        Toast.makeText(this, car.id.toString(), Toast.LENGTH_SHORT).show()
         var carro = Car(0,"","",0,"",0,"")
         carViewModel.allCars.observe(this, Observer { cars ->
             cars?.let { carro = Car(it[car.id].id, it[car.id].brand, it[car.id].model, it[car.id].year,

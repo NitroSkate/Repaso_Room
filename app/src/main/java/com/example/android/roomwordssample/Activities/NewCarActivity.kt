@@ -30,7 +30,7 @@ class NewCarActivity : AppCompatActivity() {
         carViewModel = ViewModelProviders.of(this).get(CarViewModel::class.java)
         var carlist = 0
        carViewModel.allCars.observe(this, Observer { cars ->
-           cars?.let { carlist = it.size }
+           cars?.let { carlist = it.size}
        })
         val editBrandView = findViewById<EditText>(R.id.edit_brand)
         val editModelView = findViewById<EditText>(R.id.edit_model)

@@ -4,12 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:orientation="vertical"
     tools:context=".Activities.CarViewerActivity">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        style="@style/word_title"
         android:layout_gravity="center"
         android:text="text"
         android:id="@+id/brandc"
@@ -17,6 +20,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        style="@style/word_title"
         android:layout_gravity="center"
         android:text="text"
         android:id="@+id/modelc"
@@ -24,6 +29,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        style="@style/word_title"
         android:layout_gravity="center"
         android:text="text"
         android:id="@+id/yearc"
@@ -31,6 +38,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        style="@style/word_title"
         android:layout_gravity="center"
         android:text="text"
         android:id="@+id/infoc"
@@ -38,6 +47,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        style="@style/word_title"
         android:layout_gravity="center"
         android:text="text"
         android:id="@+id/pricec"
@@ -45,6 +56,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        style="@style/word_title"
         android:layout_gravity="center"
         android:text="text"
         android:id="@+id/specsc"

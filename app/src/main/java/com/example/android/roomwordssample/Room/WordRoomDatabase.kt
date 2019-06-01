@@ -97,6 +97,12 @@ abstract class WordRoomDatabase : RoomDatabase() {
             var car1 = Car(0,"Nissan", "Skyline Nur Spec V", 1997, "One notorius JDM car",
                     34000, "Engine: RB26")
             carDao.insert(car1)
+            var car2 = Car(1,"Mitsubishi", "Lancer Evolution VIII", 2003, "Tommi Makinen legacy",
+                    29000, "Engine: 4G63T")
+            carDao.insert(car2)
+            var car3 = Car(2,"Toyota", "Supra RZ", 1997, "Toyota's secret weapon",
+                    35000, "Engine: 2JZ ")
+            carDao.insert(car3)
 
 
             var word = Word("Hello")

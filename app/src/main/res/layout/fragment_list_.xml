@@ -11,31 +11,49 @@
     <TextView
         android:id="@+id/tv_brand"
         android:layout_width="wrap_content"
+        android:layout_marginBottom="25dp"
+        style="@style/word_title"
+        android:textSize="15sp"
         android:layout_height="wrap_content"
         android:text="@string/hello_blank_fragment" />
     <TextView
         android:id="@+id/tv_model"
         android:layout_width="wrap_content"
+        android:layout_marginBottom="25dp"
+        style="@style/word_title"
+        android:textSize="15sp"
         android:layout_height="wrap_content"
         android:text="@string/hello_blank_fragment" />
     <TextView
         android:id="@+id/tv_year"
         android:layout_width="wrap_content"
+        android:layout_marginBottom="25dp"
+        style="@style/word_title"
+        android:textSize="15sp"
         android:layout_height="wrap_content"
         android:text="@string/hello_blank_fragment" />
     <TextView
         android:id="@+id/tv_info"
         android:layout_width="wrap_content"
+        android:layout_marginBottom="25dp"
+        style="@style/word_title"
+        android:textSize="15sp"
         android:layout_height="wrap_content"
         android:text="@string/hello_blank_fragment" />
     <TextView
         android:id="@+id/tv_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        style="@style/word_title"
+        android:textSize="15sp"
         android:text="@string/hello_blank_fragment" />
     <TextView
         android:id="@+id/tv_specs"
         android:layout_width="wrap_content"
+        android:layout_marginBottom="25dp"
+        style="@style/word_title"
+        android:textSize="15sp"
         android:layout_height="wrap_content"
         android:text="@string/hello_blank_fragment" />
 
